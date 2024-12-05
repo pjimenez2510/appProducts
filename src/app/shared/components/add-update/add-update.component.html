@@ -1,0 +1,65 @@
+<app-header
+  [title]="product ? 'Actualizar Producto' : 'Registrar Producto'"
+  [isModal]="isModal"
+></app-header>
+<ion-content [fullscreen]="true">
+  <div class="d-flex-center">
+    <form
+      [formGroup]="form"
+      class="ion-padding ion-text-center"
+      (ngSubmit)="submit()"
+      (keypress.enter)="submit()"
+    >
+      <!-- En caso que exista imagen -->
+      <ion-avatar *ngIf="form.value.image">
+        <img [src]="form.value.image" />
+      </ion-avatar>
+      <!-- En caso de que no exista imagen -->
+      <ion-icon
+        class="image-icon"
+        *ngIf="!form.value.image"
+        name="image-outline"
+      ></ion-icon>
+
+      <br />
+      <!-- Botón para cargar imagen -->
+      <ion-button (click)="takeImage()" mode="ios" size="small" shape="round">
+        Tomar/Seleccionar
+      </ion-button>
+      <!-- Name -->
+      <app-custom-input
+        autocomplete="name"
+        icon="person-outline"
+        [control]="form.controls.name"
+        type="text"
+        label="Producto"
+      ></app-custom-input>
+      <!-- Price -->
+      <app-custom-input
+        autocomplete="email"
+        icon="mail-outline"
+        [control]="form.controls.price"
+        type="text"
+        label="Precio"
+      ></app-custom-input>
+      <!-- SoldUnits -->
+      <app-custom-input
+        icon="lock-closed-outline"
+        [control]="form.controls.soldUnits"
+        type="text"
+        label="Unidades Vendidas"
+      ></app-custom-input>
+      <!-- Login -->
+      <ion-button
+        expand="block"
+        mode="ios"
+        class="submit"
+        type="submit"
+        [disabled]="form.invalid"
+      >
+        Registrar
+        <ion-icon slot="end" name="person-add-outline"></ion-icon>
+      </ion-button>
+    </form>
+  </div>
+</ion-content>
